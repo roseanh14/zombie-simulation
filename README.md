@@ -15,7 +15,7 @@ The simulation models the interaction between three types of agents:
 - Doctor: An agent who searches for zombies and attempts to heal them.
 
 The main goal is to investigate how the number of doctors affects
-the spread of the infection and the number of surviving people.
+the spread of infection and the number of surviving people.
 
 ## 2. Simulation Model
 
@@ -29,7 +29,8 @@ Default parameters:
 - Initial doctors: depends on the scenario
 - Infection probability: 0.3
 - Healing probability: 0.6
-- Simulation duration: 100 steps
+- Simulation duration: 300 steps
+- Number of replications: 50 per scenario
 
 Multiple agents can occupy the same grid cell.
 
@@ -123,13 +124,17 @@ Three scenarios are evaluated:
 
 | Scenario | People | Zombies | Doctors |
 |----------|--------|---------|---------|
-| 1 | 100 | 10 | 0 |
-| 2 | 100 | 10 | 5 |
-| 3 | 100 | 10 | 10 |
+| A | 100 | 10 | 0 |
+| B | 100 | 10 | 5 |
+| C | 100 | 10 | 10 |
 
 All scenarios use the same grid size and infection rules.
 
-Each scenario is repeated 30 times.
+Each scenario is repeated 50 times.
+
+Each simulation runs for 300 steps.
+
+In total, 150 simulation runs are performed.
 
 Each replication uses a random seed to generate reproducible results.
 
@@ -159,10 +164,62 @@ CI = mean +/- 1.96 * standard_deviation / sqrt(n)
 
 where n is the number of replications.
 
-The confidence interval provides an estimate of the uncertainty
-of the mean result.
+The confidence interval provides an approximate estimate
+of the uncertainty of the mean result.
 
-## 10. Generated Results
+## 10. Experimental Results
+
+The following results were obtained from 50 replications
+of each scenario.
+
+| Scenario | Mean Final People | 95% CI Lower | 95% CI Upper |
+|----------|-------------------|--------------|--------------|
+| A: 0 doctors | 0.00 | 0.00 | 0.00 |
+| B: 5 doctors | 8.02 | 0.80 | 15.24 |
+| C: 10 doctors | 97.34 | 87.74 | 106.94 |
+
+### Scenario A: No Doctors
+
+All 50 replications ended with no surviving people.
+
+The infection spread to the entire population.
+
+### Scenario B: Five Doctors
+
+The average final number of people was 8.02.
+
+In 3 out of 50 replications, the infection was completely
+eliminated.
+
+The doctors slowed the spread of infection but were
+not sufficient to stop it consistently.
+
+### Scenario C: Ten Doctors
+
+The average final number of people was 97.34.
+
+In 44 out of 50 replications, the infection was completely
+eliminated.
+
+This scenario achieved the best results.
+
+## 11. Convergence Analysis
+
+The convergence graph shows how the cumulative mean
+changes as the number of replications increases.
+
+In the scenario without doctors, the cumulative mean
+remained stable at zero.
+
+In the scenarios with five and ten doctors, the
+cumulative means changed when individual replications
+produced different outcomes.
+
+The results suggest that 50 replications are useful
+for comparing the scenarios, but additional replications
+could improve the precision of the estimates.
+
+## 12. Generated Results
 
 The application creates the following files:
 
@@ -176,25 +233,25 @@ The application creates the following files:
 - population_by_step.png: Average number of people over time.
 - convergence.png: Convergence of cumulative means.
 
-## 11. Evaluation
+## 13. Conclusion
 
-The main research question is:
+The experiments demonstrate that the number of doctors
+has a significant influence on the simulation outcomes
+under the selected model parameters.
 
-How does the number of doctors affect the spread of infection
-and the number of surviving people?
+Without doctors, all people became infected in every run.
 
-The results of the three scenarios will be compared using
-the average final population and 95% confidence intervals.
+With five doctors, the infection was eliminated in
+6% of replications.
 
-The population development graphs will show whether
-the number of agents stabilizes during the simulation.
+With ten doctors, the infection was eliminated in
+88% of replications.
 
-The convergence graph will show whether the estimated
-mean becomes stable as the number of replications increases.
+The results show that increasing the number of doctors
+can substantially reduce the spread of infection and
+improve population survival.
 
-Final conclusions will be added after running the experiments.
-
-## 12. Technologies
+## 14. Technologies
 
 - Python
 - Mesa
@@ -202,7 +259,7 @@ Final conclusions will be added after running the experiments.
 - CSV
 - Python Statistics Library
 
-## 13. References
+## 15. References
 
 Mesa Documentation:
 https://mesa.readthedocs.io/stable/
@@ -212,4 +269,3 @@ https://repast.github.io/docs/RepastJavaGettingStarted.pdf
 
 This project is an independent simplified implementation
 of a zombie agent-based model using Python and Mesa.
-```

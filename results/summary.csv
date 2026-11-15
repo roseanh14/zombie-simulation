@@ -1,0 +1,4 @@
+scenario,runs,mean_people,ci95_low,ci95_high
+no_doctors,50,0,0.0,0.0
+five_doctors,50,8.02,0.8,15.24
+ten_doctors,50,97.34,87.74,106.94

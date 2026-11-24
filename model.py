@@ -8,7 +8,7 @@ class ZombieModel(mesa.Model):
                  doctors=0, infection_chance=0.3, healing_chance=0.6,
                  seed=None):
 
-        super().__init__(seed=seed)
+        super().__init__(rng=seed)
 
         if width < 2 or height < 2:
             raise ValueError("Map must be at least 2 x 2")

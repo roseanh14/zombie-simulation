@@ -269,3 +269,10 @@ https://repast.github.io/docs/RepastJavaGettingStarted.pdf
 
 This project is an independent simplified implementation
 of a zombie agent-based model using Python and Mesa.
+
+### 16. Live Animation
+
+To watch the agents move on the grid, run:
+
+```bash
+python animation.py
